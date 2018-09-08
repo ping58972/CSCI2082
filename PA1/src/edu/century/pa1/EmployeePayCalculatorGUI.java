@@ -25,7 +25,7 @@ public class EmployeePayCalculatorGUI {
 		PayCalculator payCal = new PayCalculator("jonh", 14.75);
 		PayCalculator payCal2 = new PayCalculator("Ping", 18.75);
 		System.out.println(payCal.getReportId());
-		//System.out.println(payCal2.getReportId());
+		System.out.println(payCal2.getReportId());
 	}
 
 	/**
