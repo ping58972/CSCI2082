@@ -34,39 +34,57 @@ public class PayCalculator implements Constants {
 	}
 	
 	public void increaseHourlyWage(double raiseRate) {
-		
+		this.hourlyWage = this.hourlyWage * (1+ (raiseRate/100));
 	}
 	public double overTimeHoursWorked(double hoursWorked) {
-		return 19;
+		return (hoursWorked - FULL_TIME);
 	}
 	public double overTimePay(double overTimeHours) {
-		return 12;
-	}
-	public double grossPay(double hoursWorked) {
-		return 598.85;
-	}
-	public double federalDeductions(double grossPay) {
-		return 598.85;
-	}
-	public double stateDeductions(double grossPay) {
-		return 89;
-	}
-	public double totalDeductions(double federalDeductions, double stateDeductions) {
-		return 598.85;
-	}
-	public double netYearIncome(int[] hoursPerPayPeriod) {
-		return 20646.53;
-	}
-	public double grossYearIncome(int[] hoursPerPayPeriod) {
-		return 29079.62;
+		return (overTimeHours*(getHourlyWage()*OVERTIME_RATE));
 	}
 	public double netPay(double hoursWorked) {
-		return 979.18;
+		return (grossPay(hoursWorked) - totalDeductions(
+				federalDeductions(grossPay(hoursWorked)),
+				stateDeductions(grossPay(hoursWorked))));
 	}
+	public double grossPay(double hoursWorked) {
+		if(hoursWorked <= FULL_TIME) {
+		return (hoursWorked * getHourlyWage());
+		}else return ((FULL_TIME* getHourlyWage())
+				+ overTimePay(overTimeHoursWorked(hoursWorked)));
+	}
+	public double federalDeductions(double grossPay) {
+		return grossPay * FEDERAL_TAX_RATE;
+	}
+	public double stateDeductions(double grossPay) {
+		return grossPay * STATE_TAX_RATE;
+	}
+	public double totalDeductions(double federalDeductions,
+			double stateDeductions) {
+		return federalDeductions + stateDeductions;
+	}
+	public double netYearIncome(int[] hoursPerPayPeriod) {
+		int[] hoursPPP = hoursPerPayPeriod.clone();
+		double sumAllDedu =0;
+		for(int hour : hoursPPP) {
+			sumAllDedu += totalDeductions(federalDeductions(grossPay(hour))
+					, stateDeductions(grossPay(hour))) ;
+		}
+		return grossYearIncome(hoursPPP)-sumAllDedu;
+	}
+	public double grossYearIncome(int[] hoursPerPayPeriod) {
+		int[] hoursPPP = hoursPerPayPeriod.clone();
+		double sumAllIncome =0;
+		for(int hour : hoursPPP) {
+			sumAllIncome += grossPay(hour);
+		}
+		return sumAllIncome;
+	}
+
 	@Override
 	public String toString() {
-		return "PayCalculator [name=" + name + ", reportId=" + reportId + ", hourlyWage=" + hourlyWage + "]";
+		return "PayCalculator [name=" + name + ", reportId=" 
+	+ reportId + ", hourlyWage=" + hourlyWage + "]";
 	}
-
-
+	
 }

@@ -45,11 +45,6 @@ class PayCalculatorTest {
 	}
 
 	@Test
-	void testPayCheckStub() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testOverTimeHoursWorked() {
 		double hoursWorked = 99;
 		double actualOverTimeHoursWorked = payCalculator.overTimeHoursWorked(hoursWorked);
