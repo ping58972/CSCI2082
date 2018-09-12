@@ -37,7 +37,9 @@ public class PayCalculator implements Constants {
 		this.hourlyWage = this.hourlyWage * (1+ (raiseRate/100));
 	}
 	public double overTimeHoursWorked(double hoursWorked) {
+		if(hoursWorked > FULL_TIME)
 		return (hoursWorked - FULL_TIME);
+		else return 0.0;
 	}
 	public double overTimePay(double overTimeHours) {
 		return (overTimeHours*(getHourlyWage()*OVERTIME_RATE));
