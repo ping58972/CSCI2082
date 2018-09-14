@@ -1,5 +1,6 @@
 package Sep132018;
 //Try to solve problem.
+//hehe
 public class BagOfIntegers implements Cloneable {
 	
 	private int numberOfItems;
@@ -56,7 +57,7 @@ public class BagOfIntegers implements Cloneable {
 			e.printStackTrace();
 		}
 		
-		//copy.items = items.clone();
+		copy.items = items.clone();
 		
 		return copy;
 	}
@@ -82,13 +83,15 @@ public class BagOfIntegers implements Cloneable {
 		for (int i = 0; i < 7; i++) {
 			bag.add(i * 3);
 		}
-		
+		//BagOfIntegers bagCopy = bag.clone();
 		System.out.println(bag);
 
 		bagCopy.add(-99);
+		bagCopy.addMany(99,45);
 		
 		System.out.println(bag);
-		
+		System.out.println(bagCopy);
+		System.out.println(bag);
 		
 		
 	}
