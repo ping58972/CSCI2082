@@ -1,11 +1,18 @@
 package edu.century.pa1;
-
+/* public class EmployeePayCalculatorGUI
+ * 	The class use for building the GUI for display the
+ * 	result of PayCalcuator class.
+ * 
+ *  Century College, CSCI 2082 Fall 2018.
+ *  EmployeePayCalculatorGUI.java, Programming Assignment 01.
+ *  
+ *  @author (Ping) Nalongsone Danddank
+ *  @version 1.0
+ *  @since 09/13/2018
+ * */
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import java.awt.ComponentOrientation;
-
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,13 +20,8 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 import javax.swing.JLabel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.text.StyleConstants;
-import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
 
 public class EmployeePayCalculatorGUI implements Constants{
@@ -39,10 +41,7 @@ public class EmployeePayCalculatorGUI implements Constants{
 					e.printStackTrace();
 				}
 			}
-		});
-//		PayCalculator payCal = new PayCalculator("jonh", 14.75);
-//		PayCalculator payCal2 = new PayCalculator("Ping", 18.75);
-		
+		});		
 	}
 
 	/**
@@ -57,24 +56,23 @@ public class EmployeePayCalculatorGUI implements Constants{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		PayCalculator payCal = new PayCalculator("Jonh Smith", 14.75);
-		NumberFormat formatter = new DecimalFormat("#0.00");		
+		PayCalculator payCal = new PayCalculator("Jonh Smith", 14.75);		
 		String[] displays = new String[HOURS_WORKED.length];
 		
 		for(int i=0; i< HOURS_WORKED.length; i++ ) {
 			if (HOURS_WORKED[i] != 0)
-			displays[i] = String.format("%-20s%-20s%-40s%-30s%-45s%-50s%-50s%-50s%-50s%-40s",
-					payCal.getName(), payCal.getReportId(),
-					formatter.format(HOURS_WORKED[i]),
-					formatter.format(payCal.overTimeHoursWorked(HOURS_WORKED[i])),
-					formatter.format(payCal.grossPay(HOURS_WORKED[i])),
-					formatter.format(payCal.overTimePay(payCal.overTimeHoursWorked(HOURS_WORKED[i]))),
-					formatter.format(payCal.federalDeductions(payCal.grossPay(HOURS_WORKED[i]))),
-					formatter.format(payCal.stateDeductions(payCal.grossPay(HOURS_WORKED[i]))),
-					formatter.format(payCal.totalDeductions(payCal.federalDeductions(payCal.grossPay(HOURS_WORKED[i])), 
-							payCal.stateDeductions(payCal.grossPay(HOURS_WORKED[i])))),
-					formatter.format(payCal.netPay(HOURS_WORKED[i])));
-			else displays[i] = "********* Vacation time : - ) **********";
+				displays[i] = String.format("%-16s%-18s%-43d%-35.2f%-44.2f%-50.2f%-50.2f%-50.2f%-50.2f%-40.2f\n",
+						payCal.getName(), payCal.getReportId(),
+						HOURS_WORKED[i],
+						payCal.overTimeHoursWorked(HOURS_WORKED[i]),
+						payCal.grossPay(HOURS_WORKED[i]),
+						payCal.overTimePay(payCal.overTimeHoursWorked(HOURS_WORKED[i])),
+						payCal.federalDeductions(payCal.grossPay(HOURS_WORKED[i])),
+						payCal.stateDeductions(payCal.grossPay(HOURS_WORKED[i])),
+						payCal.totalDeductions(payCal.federalDeductions(payCal.grossPay(HOURS_WORKED[i])), 
+								payCal.stateDeductions(payCal.grossPay(HOURS_WORKED[i]))),
+						payCal.netPay(HOURS_WORKED[i]));
+			else displays[i] = "********* Vacation time : - ) **********\n";
 		}
 		
 		frame = new JFrame();
@@ -111,7 +109,7 @@ public class EmployeePayCalculatorGUI implements Constants{
 							"Name", "|ID", "|Hours Woeked", "|Over Time", "|Regular Pay","|Overtime Pay", 
 							"|Federal Deductions", "|State Deductions","|Total Deductions","|NetPay"));
 					for(String display : displays) {
-						textArea.append(display+"\n");
+						textArea.append(display);
 						}
 				}
 				
