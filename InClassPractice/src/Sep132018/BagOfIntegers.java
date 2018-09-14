@@ -1,5 +1,5 @@
 package Sep132018;
-//
+//Try to solve problem.
 public class BagOfIntegers implements Cloneable {
 	
 	private int numberOfItems;
